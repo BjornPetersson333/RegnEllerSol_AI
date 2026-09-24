@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vädret nu</title>
+
+    <!-- Typsnitt från Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="sidhuvud">
+        <h1>Vädret nu</h1>
+
+        <!-- Sökformuläret. JavaScript fångar "submit" så att sidan inte laddas om -->
+        <form id="sokformular" class="sok">
+            <label for="stad">Stad</label>
+            <div class="sokrad">
+                <input type="text" id="stad" placeholder="t.ex. Göteborg" autocomplete="off">
+                <button type="submit">Visa väder</button>
+            </div>
+        </form>
+    </header>
+
+    <main>
+        <!-- Här visas instruktioner, "laddar"-text och felmeddelanden.
+             aria-live gör att skärmläsare läser upp ändringar. -->
+        <p id="status" class="status" aria-live="polite">
+            Skriv in en stad för att se vädret just nu och de kommande fem dagarna.
+        </p>
+
+        <!-- Fylls med HTML från JavaScript. "hidden" döljer dem tills det finns data. -->
+        <section id="aktuellt" class="aktuellt" hidden></section>
+        <section id="prognos" class="prognos" hidden></section>
+    </main>
+
+    <footer class="sidfot">
+        Väderdata från Open-Meteo
+    </footer>
+
+    <!-- Skriptet laddas sist så att alla HTML-element redan finns -->
+    <script src="script.js"></script>
+</body>
+</html>

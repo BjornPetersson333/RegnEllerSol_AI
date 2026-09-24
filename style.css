@@ -1,0 +1,287 @@
+/* ===== Färger och typsnitt (CSS-variabler) ===== */
+:root {
+    --himmel: #dce8ee;   /* bakgrund */
+    --moln: #ffffff;     /* rutor */
+    --djup: #16324a;     /* text */
+    --regn: #4f7c99;     /* sekundär text och kanter */
+    --sol: #f2b632;      /* accent */
+    --fel: #b3261e;      /* felmeddelanden */
+
+    --text: "Barlow", "Segoe UI", Arial, sans-serif;
+    --rubrik: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+}
+
+/* Gör så att attributet hidden alltid döljer elementet */
+[hidden] {
+    display: none !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--himmel);
+    color: var(--djup);
+    font-family: var(--text);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+}
+
+/* Allt innehåll får en maxbredd och centreras på sidan */
+.sidhuvud,
+main,
+.sidfot {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ===== Sidhuvud och sökfält ===== */
+.sidhuvud {
+    padding-top: 2.5rem;
+}
+
+h1 {
+    font-family: var(--rubrik);
+    font-weight: 700;
+    font-size: 2.25rem;
+    margin: 0 0 1.25rem;
+}
+
+.sok label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+.sokrad {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sokrad input {
+    flex: 1;
+    font: inherit;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--regn);
+    border-radius: 6px;
+    background: var(--moln);
+    color: var(--djup);
+}
+
+.sokrad button {
+    font: inherit;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--djup);
+    color: var(--moln);
+    cursor: pointer;
+}
+
+.sokrad button:hover {
+    background: var(--regn);
+}
+
+/* Tydlig markering när man använder tangentbordet */
+input:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--sol);
+    outline-offset: 2px;
+}
+
+/* ===== Statusrad ===== */
+.status {
+    margin: 2rem 0;
+    color: var(--regn);
+}
+
+.status.fel {
+    color: var(--fel);
+    font-weight: 600;
+}
+
+/* ===== Aktuellt väder ===== */
+.aktuellt {
+    margin: 2rem 0 3rem;
+}
+
+.plats {
+    font-family: var(--rubrik);
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.omrade {
+    margin: 0;
+    color: var(--regn);
+}
+
+.nu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ikon-stor {
+    font-size: 4.5rem;
+}
+
+/* Den stora temperaturen – sidans blickfång */
+.temperatur {
+    font-family: var(--rubrik);
+    font-weight: 700;
+    font-size: 9rem;
+    line-height: 1;
+    margin: 0;
+}
+
+.beskrivning {
+    font-size: 1.375rem;
+    font-weight: 500;
+    margin: 0 0 1.5rem;
+}
+
+.detaljer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 3px solid var(--sol);
+}
+
+.detaljer dt {
+    color: var(--regn);
+    font-size: 0.9375rem;
+}
+
+.detaljer dd {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* ===== Prognos ===== */
+.prognos h2 {
+    font-family: var(--rubrik);
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+}
+
+.dagar {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);   /* fem dagar bredvid varandra */
+    gap: 0.75rem;
+}
+
+.dag {
+    background: var(--moln);
+    border-radius: 6px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.dag p {
+    margin: 0.25rem 0;
+}
+
+.veckodag {
+    font-weight: 600;
+}
+
+.dag .ikon {
+    font-size: 2.25rem;
+}
+
+.dag-text,
+.nederbord {
+    font-size: 0.9375rem;
+    color: var(--regn);
+}
+
+.max {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.min {
+    color: var(--regn);
+}
+
+.sidfot {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    font-size: 0.875rem;
+    color: var(--regn);
+}
+
+/* ===== Media query 1: surfplatta och mindre (max 700px) =====
+   Prognosen byter från fem kolumner till en lista med rader. */
+@media (max-width: 700px) {
+    .dagar {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .dag {
+        display: grid;
+        grid-template-columns: 7rem 2.5rem 1fr auto;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: left;
+        padding: 0.75rem 1rem;
+    }
+
+    .dag .ikon {
+        font-size: 1.75rem;
+    }
+
+    /* Nederbörden får plats på egen rad under */
+    .nederbord {
+        grid-column: 3 / 5;
+    }
+
+    .temperatur {
+        font-size: 7rem;
+    }
+}
+
+/* ===== Media query 2: mobil (max 460px) =====
+   Sökfältet och knappen läggs under varandra och texten krymper. */
+@media (max-width: 460px) {
+    .sokrad {
+        flex-direction: column;
+    }
+
+    .temperatur {
+        font-size: 5.5rem;
+    }
+
+    .ikon-stor {
+        font-size: 3.25rem;
+    }
+
+    .detaljer dd {
+        font-size: 1.25rem;
+    }
+
+    .dag {
+        grid-template-columns: 5.5rem 2rem 1fr auto;
+    }
+
+    .dag-text {
+        display: none;   /* ikonen räcker på små skärmar */
+    }
+
+    .nederbord {
+        grid-column: 1 / 5;
+    }
+}
